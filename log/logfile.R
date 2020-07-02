@@ -47,7 +47,7 @@ GapminderApp <- function(path){
     
   }, error = function(e){
     
-    logerror("App bloqued...", logger = "log")
+    logerror("App blocked...", logger = "log")
     stop()
     # In case of blocking errors, the app will stop.
   },finally = {
