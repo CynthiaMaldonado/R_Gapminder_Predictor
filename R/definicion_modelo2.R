@@ -1,4 +1,4 @@
-@title callconfig
+
 #' @description xml config to R_list
 #'
 #' @param path, string
@@ -33,7 +33,6 @@ model <- lm(mpg ~ disp) #lineal regression model.
 
 predict(model,data.frame(mpg)) #predict
 
-print=(Mean squared error: %2f'')  
 
 
 
