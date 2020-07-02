@@ -1,6 +1,6 @@
 
-#' @title Gapminder_Predictor
-#' @description Predictor de datos por fecha y país
+#' @title loginfo
+#' @description inform the user about the processing status
 #' 
 #' @param path, string 
 #' 
@@ -8,50 +8,53 @@
 #' @import logging
 #'
 #' @author MigBor
+
+
+
 GapminderApp <- function(path){
   
   tryCatch(expr = {
     
     library(logging)
     
-    #Creando el controlador "log", he copiado el nombre porque es cortito
+    #Create "log" controller
     addHandler(writeToFile, logger = "log", file = paste0(path, "/log/logfile.log"))
-    loginfo("Iniciando la App...", logger = "log")
+    loginfo("Starting the app...", logger = "log")
     
-    loginfo("Leyendo Config...", logger = "log")
+    loginfo("Reading Config...", logger = "log")
     config <- leerConfig(path)
-    loginfo("Config leído.", logger = "log")
+    loginfo("Config read.", logger = "log")
     
     
-    loginfo("Leyendo los datos...", logger = "log")
+    loginfo("Reading data...", logger = "log")
     datos <- leerDatos(config, path)
-    loginfo("Datos leídos.", logger = "log")
+    loginfo("Data read.", logger = "log")
     
     
-    loginfo("Procesando los datos...", logger = "log")
+    loginfo("Processing data...", logger = "log")
     splitDatos <- preProcesarDatos(datos, config)
-    loginfo("Datos procesados.", logger = "log")
+    loginfo("Data processed.", logger = "log")
     
-    # Es posible que modifiquemos esta parte si al final solo aplicamos r.lin
-    loginfo("Generando modelo...", logger = "log")
+    # Just in case the app compare some models. For the moment we just apply r.lin
+    loginfo("Generating model...", logger = "log")
     output <- generarModelo(splitDatos, config)
-    loginfo("Modelo Generado.", logger = "log")
+    loginfo("Modelo generated.", logger = "log")
     
     
-    loginfo("Generando output...", logger = "log")
+    loginfo("Generating output...", logger = "log")
     generarOutput(output, config, path)
-    loginfo("Output generado.", logger = "log")
+    loginfo("Output ready to check.", logger = "log")
     
   }, error = function(e){
     
-    logerror("Aplicación bloqueada...", logger = "log")
+    logerror("App bloqued...", logger = "log")
     stop()
-    # Para errores bloqueantes, hacemos que la aplicación colapse.
+    # In case of blocking errors, the app will stop.
   },finally = {
     
-    loginfo("Fin de la ejecución.", logger = "log")
+    loginfo("End of execution.", logger = "log")
     removeHandler(writeToFile, logger = "log")
-    # Desactivamos el controlador 
+    # Disable the controller 
   })
   
   
