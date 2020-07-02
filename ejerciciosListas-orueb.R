@@ -4,6 +4,9 @@
 
 mi_lista <- list("hola", 42, c(1, 2, 3), TRUE)
 
+
+ # HOLA
+
 #ej 8
 #Write a R program to merge two given lists into one list
 
