@@ -1,0 +1,12 @@
+<config>
+ 
+  <data>
+    <predictores>    </predictores>
+    <target>   </target>
+  </data>
+  
+  <modelo>
+    <testRate>0.2</testRate>
+  </modelo>
+
+</config>
