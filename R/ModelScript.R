@@ -1,53 +1,58 @@
 
-#' @description xml config to R_list
-#'
-#' @param path, string
-#'
-#' @return list(config.xml)
-#'
-#' @export
-#' @import XML
-#'
-#' @author Cyn
-
-
-
-#' @title lineal regression model
+#' @title Lineal regression model
 #' 
-#' @description code to run the linear regression model.
+#' @description Code to run the linear regression model.
 #' 
-#' @param 
+#' @param final_df, dataframe
 #' 
-#' @return 
+#' @export 
+#' @import MLmetrics
+#' 
+#' @return final_prediction
 
 #' @author Fran
+
 
 #get the dataset
 
 cars=datasets::mtcars 
 
-regression_model <- function(predictors, target){
+regression_model <- function(final_df){
+  
+  #Drop rows with NAs
+  
+  clean_df <- na.omit(final_df)
+  
+  #Split X and y
+  
+  y <- clean_df[,ncol(clean_df)]
+  X <- clean_df[, 3:(ncol(clean_df) -1)]
 
-#Split in Train & Test
-
-smp_size <- floor(0.75 * nrow(mtcars))
-
-train_ind <- sample(seq_len(nrow(mtcars)), size = smp_size)
-
-train <- mtcars[train_ind, ]
-test <- mtcars[-train_ind, ]
-
-#linear regression model. ATTENTION: y ~ x 
-
-model <- lm(train$mpg ~ train$hp)
-
-#predict WITH X
-
-predictions <- predict(model, data.frame(train$hp)) 
-
-#make a comparison of predictions with test
-
-predictions_comparison <- RMSE(predictions, test$hp)
+  #Split in Train & Test
+  
+  smp_size <- floor(config$model$trainRate * nrow(clean_df))
+  
+  set.seed(123)
+  
+  train_ind <- sample(seq_len(nrow(clean_df)), size = smp_size)
+  
+  X_train <- X[train_ind, ]
+  X_test <- X[-train_ind, ]
+  
+  y_train <- y[train_ind, ]
+  y_test <- y[-train_ind, ]
+  
+  #linear regression model. ATTENTION: y ~ x 
+  
+  object_model <- lm(y_train ~ X_train)
+  
+  #predict WITH X
+  
+  predictions <- predict(object_model, X_test) 
+  
+  #make a comparison of predictions with test
+  
+  predictions_comparison <- RMSE(predictions, y_test)
 
 }
 
