@@ -1,5 +1,7 @@
 lapply(c('XML', 'logging', 'reshape'), require, character.only = TRUE)
 
-path <- ('C:\Users\34671\Documents\GitHub\R_Gapminder_Predictor')
+path <- 'C:/Users/34671/Documents/GitHub/R_Gapminder_Predictor/'
 
-R_Gapminder_Predictor <- paste0(path, "/R/start.R")
+lapply(paste0("R/", list.files(path = "R/", recursive = TRUE)), source)
+
+R_Gapminder_Predictor <- paste0(path, "R/start.R")
