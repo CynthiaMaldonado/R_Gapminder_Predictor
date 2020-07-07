@@ -6,6 +6,7 @@
 #'
 #' @import logging
 #' @return
+#' @author MigBor
 #'
 generarOutput <- function(output, config, path){
   
