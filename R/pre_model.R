@@ -3,7 +3,7 @@
 #' 
 #' @description Code to run the linear regression model.
 #' 
-#' @param final_df, dataframe
+#' @param df_merge_final, dataframe
 #' 
 #' @export 
 #' @import MLmetrics
@@ -17,11 +17,11 @@
 
 cars=datasets::mtcars 
 
-regression_model <- function(final_df){
+regression_model <- function(df_merge_final){
   
   #Drop rows with NAs
   
-  clean_df <- na.omit(final_df)
+  clean_df <- na.omit(df_merge_final)
   
   #Split X and y
   
@@ -53,7 +53,9 @@ regression_model <- function(final_df){
   #make a comparison of predictions with test
   
   predictions_comparison <- RMSE(predictions, y_test)
-
+  
+  return (predictions_comparison)
+  
 }
 
 
