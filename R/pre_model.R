@@ -4,6 +4,7 @@
 #' @description Code to run the linear regression model.
 #' 
 #' @param df_merge_final, dataframe
+#' @param config
 #' 
 #' @export 
 #' @import MLmetrics
@@ -17,7 +18,7 @@
 
 cars=datasets::mtcars 
 
-regression_model <- function(df_merge_final){
+regression_model <- function(df_merge_final, config){
   
   #Drop rows with NAs
   
