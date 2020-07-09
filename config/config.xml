@@ -3,6 +3,9 @@
   <data>
     <predictors>    </predictors>
     <target>   </target>
+    
+    <country>  </country>
+    <year>  </year>
   </data>
   
   <model>
