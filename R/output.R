@@ -1,4 +1,4 @@
-#' Title
+#' Title Generating Output
 #'
 #' @param output 
 #' @param config 
@@ -6,7 +6,9 @@
 #'
 #' @import logging
 #' @return
-#'generarOutput <- function(output, config, path){
+#' @author MigBor
+
+generarOutput <- function(output, config, path){
 
 marktmp <- Sys.time()
 # this will give us information to check the efficiency of our app
@@ -36,3 +38,4 @@ tryCatch(expr = {
   logerror("The model is not saved!", logger = 'log')
   stop()
 })
+}
