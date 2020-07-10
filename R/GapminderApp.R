@@ -21,20 +21,16 @@ GapminderApp <- function(path){
     config <- callconfig(path)
     loginfo("Config read.", logger = "log")
     
-    
+    browser()
     loginfo("Reading data...", logger = "log")
     data <- importdata(path, config)
     loginfo("Data read.", logger = "log")
     
-    
+    browser()
     loginfo("Looking for answer", logger = "log")
     searching <- prediction(df_merge_final, config)
     loginfo("Answer found.", logger = "log")
     
-    #función dentro de función necesita llamarse aquí?
-    loginfo("Making prediction", logger = "log")
-    modelo <- regression_model(df_merge_final, config)
-    loginfo("Prediction done.", logger = "log")
     
     # Just in case the app compare some models. For the moment we just apply r.lin
     # loginfo("Generating model...", logger = "log")

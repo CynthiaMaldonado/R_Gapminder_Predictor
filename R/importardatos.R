@@ -9,7 +9,7 @@
 #' @return df_merge_final
 #' @export
 
-#' @import reshape
+#' @import reshape2
 #' @author gonzalo
 
  importdata <- function(path,config){

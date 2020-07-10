@@ -27,14 +27,14 @@ prediction <- function(df_merge_final, config){
   
   check_nan <- df_merge_final[pred_file, 3:(ncol(df_merge_final)-1)]
   
-  if(is.na(target_value) = FALSE){
+  if(is.na(target_value) == FALSE){
     
     return(target_value)
     }
   
   else{
     
-    if(is.na(check_nan) = FALSE){
+    if(is.na(check_nan) == FALSE){
       
       output_pred <- regression_model(df_merge_final, config)
       }
