@@ -1,11 +1,3 @@
-lapply(c('XML', 'logging', 'reshape', 'MLmetrics'), require, character.only = TRUE)
-
-path <- 'C:/Users/34671/Documents/GitHub/R_Gapminder_Predictor/'
-
-lapply(paste0("R/", list.files(path = "R/", recursive = TRUE)), source)
-
-R_Gapminder_Predictor <- paste0(path, "R/start.R")
-
 
 #' @title loginfo
 #' @description inform the user about the processing status
@@ -21,31 +13,33 @@ GapminderApp <- function(path){
   
   tryCatch(expr = {
     
-    library(logging)
-    
     #Create "log" controller
     addHandler(writeToFile, logger = "log", file = paste0(path, "/log/logfile.log"))
     loginfo("Starting the app...", logger = "log")
     
     loginfo("Reading Config...", logger = "log")
-    config <- leerConfig(path)
+    config <- callconfig(path)
     loginfo("Config read.", logger = "log")
     
     
     loginfo("Reading data...", logger = "log")
-    datos <- leerDatos(config, path)
+    data <- importdata(path, config)
     loginfo("Data read.", logger = "log")
     
     
-    loginfo("Processing data...", logger = "log")
-    splitDatos <- preProcesarDatos(datos, config)
-    loginfo("Data processed.", logger = "log")
+    loginfo("Looking for answer", logger = "log")
+    searching <- prediction(df_merge_final, config)
+    loginfo("Answer found.", logger = "log")
+    
+    #función dentro de función necesita llamarse aquí?
+    loginfo("Making prediction", logger = "log")
+    modelo <- regression_model(df_merge_final, config)
+    loginfo("Prediction done.", logger = "log")
     
     # Just in case the app compare some models. For the moment we just apply r.lin
-    loginfo("Generating model...", logger = "log")
-    output <- generarModelo(splitDatos, config)
-    loginfo("Modelo generated.", logger = "log")
-    
+    # loginfo("Generating model...", logger = "log")
+    # output <- generarModelo(splitDatos, config)
+    # loginfo("Modelo generated.", logger = "log")
     
     loginfo("Generating output...", logger = "log")
     generarOutput(output, config, path)
