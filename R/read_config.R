@@ -10,49 +10,40 @@
 #'
 #' @author Cyn
 
-callconfig <- function(path){
+callConfig <- function(path){
 
-config_path <- paste0(path, "config/config.xml")
-xmldoc <- XML::xmlParse(config_path)
-config <- XML::xmlToList(xmldoc)
-
-return (config)
-
-
-tryCatch(expr = {
+  configPath <- paste0(path, "config/config.xml")
   
-  #Leer el xml y convertirlo a lista
-  config <- XML::xmlToList(xmlParse(configPath))
+  tryCatch(expr = {
+    
+    # read xml y turn it into a list
+    config <- XML::xmlToList(xmlParse(configPath))
+    
+    
+  }, error = function(e){
+    
+    logerror("Config not found. Check if the filname in configpath is config.xml",
+             logger = 'log')
+    stop()
+  })
   
+  loginfo("Config read.", logger = 'log')
   
-}, error = function(e){
+  validateConfigNodes(config)
   
-  logerror("Config no encontrado en su ruta. Verifica que se llame config.xml",
-           logger = 'log')
-  stop()
-})
-
-loginfo("Config leido.", logger = 'log')
-
-validateConfigNodes(config)
-
-config$columnas$predictorasNumericas <- trimws(strsplit(config$columnas$predictorasNumericas, ",")[[1]])
-config$columnas$fechas$tiempos <- as.numeric(trimws(strsplit(config$columnas$fechas$tiempos, ",")[[1]]))
-
-config$columnas$mails$ratios <-  as.logical(config$columnas$mails$ratios)
-
-
-separadoresAceptados <- config$input$sep %in% c(",", ";")
-
-if(!separadoresAceptados){
+  config$data$predictors <- trimws(strsplit(config$data$predictors, ",")[[1]])
   
-  logerror("Sep solo puede valer ',' o ';' ", logger = 'log')
-  stop()
+  sep <- config$data$sep %in% c(",", ";")
   
-}
-
-return(config)
-
+  if(sep){
+    
+    logerror("Sep solo puede valer ',' o ';' ", logger = 'log')
+    stop()
+    
+  }
+  
+  return(config)
+  
 } 
 
 #' @title validateConfigNodes
@@ -63,37 +54,23 @@ return(config)
 #' 
 validateConfigNodes <- function(config){
   
-  nodoPrincipal <- identical(names(config), c("input", "columnas"))
-  nodoInput <- identical(names(config$input), c("name", "sep"))
-  nodoColumnas <- identical(names(config$columnas), c("ID", "predictorasNumericas",
-                                                      "fuenteOriginal", "dominio_mail",
-                                                      "fechas", "mails", "target", "llamada"))
+  principalNode <- identical(names(config), c("data", "model"))
+  dataNode <- identical(names(config$data), c("predictors", "target", "country", "year"))
+  modelNode <- identical(names(config$model), c("trainRate"))
   
-  nodoFechas <- identical(names(config$columnas$fechas), c("creacion", "ultima_mod",
-                                                           "apertura_ultimo", "envio_ultimo",
-                                                           "apertura_primero", "envio_primero",
-                                                           "visita_primero", "visita_ultimo",
-                                                           "tiempos"))
+  nodes <- c("principalNode" = principalNode, "dataNode" = dataNode, 
+             "modelNode" = modelNode)
   
-  nodoMails <- identical(names(config$columnas$mails), c("mailsDl", "mailsCl", "mailsOp", "ratios"))
-  
-  nodos <- c("nodoPrincipal" = nodoPrincipal, "nodoInput" = nodoInput, 
-             "nodoColumnas" = nodoColumnas, "nodoFechas" = nodoFechas,
-             "nodoMails" = nodoMails)
-  
-  check <- all(nodos)
+  check <- all(nodes)
   
   if(!check){
     
-    nodosMalos <- names(nodos)[!nodos]
+    badNodes <- names(nodes)[!nodes]
     
-    logerror(paste0("Los nodos: ", paste(nodosMalos, collapse = ", "),
-                    " estan mal estructurados!"), logger = 'log')
+    logerror(paste0("Nodes: ", paste(badNodes, collapse = ", "),
+                    " are wrongly structured!"), logger = 'log')
     stop()
     
   }
   
-}
-
-
 }

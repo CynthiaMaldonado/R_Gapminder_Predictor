@@ -1,4 +1,4 @@
-lapply(c('XML', 'logging', 'reshape2', 'MLmetrics'), require, character.only = TRUE)
+lapply(c('XML', 'logging', 'reshape', 'reshape2', 'MLmetrics', 'data.table'), require, character.only = TRUE)
 
 path <- 'C:/Users/34671/Documents/GitHub/R_Gapminder_Predictor/'
 

@@ -1,11 +1,12 @@
 <config>
  
   <data>
-    <predictors>uno.csv, dos.csv, tres.csv</predictors>
-    <target>   </target>
+    <predictors>military_expenditure_percent_of_gdp.csv , natural_gas_proven_reserves_per_person.csv</predictors>
+    <sep>,</sep>
+    <target>income_per_person_gdppercapita_ppp_inflation_adjusted.csv</target>
     
-    <country>  </country>
-    <year>  </year>
+    <country>Argentina</country>
+    <year>1985</year>
   </data>
   
   <model>

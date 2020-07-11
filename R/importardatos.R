@@ -12,16 +12,23 @@
 #' @import reshape2
 #' @author gonzalo
 
+
  importdata <- function(path,config){
-  # creating an empty list and a list with all csv,s located in config
-  list_df <- list()
-  filenames <- c(config$data$predictors, config$data$target)
+   
+   dataPath <- paste0(path, "data/")
   
   tryCatch(expr = {
+    
+  # creating an empty list and a list with all csv,s located in config
+  preds <- strsplit(config$data$predictors, ',')[[1]]
+  list_df <- list()
+  filenames <- as.list(c(preds, config$data$target))
+  
   # loop to open csv and append to list
   for (i in 1:length(filenames)){
-    url <- paste(path, filenames[i])
-    df <- data.table::fread(url,data.table = FALSE, header = TRUE)
+    #url <- paste0(dataPath, filenames[i])
+    df <- data.table::fread(paste0(dataPath, filenames[i]), sep = ',', encoding = 'UTF-8', 
+                            data.table = FALSE, header = TRUE)
    
     
     list_df[[i]] <- melt(df)
