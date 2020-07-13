@@ -20,7 +20,7 @@
   tryCatch(expr = {
     
   # creating an empty list and a list with all csv,s located in config
-  preds <- strsplit(config$data$predictors, ',')[[1]]
+  preds <- config$data$predictors
   list_df <- list()
   filenames <- as.list(c(preds, config$data$target))
   
@@ -31,7 +31,7 @@
                             data.table = FALSE, header = TRUE)
    
     
-    list_df[[i]] <- melt(df)
+    list_df[[i]] <- reshape2::melt(df)
   }  
   }, error = function(e){
     
@@ -41,8 +41,10 @@
   })
   
   # merging df
-  
-  df_merge_final <- merge_all(list_df, by=c("country","variable"))
+   
+   df_merge_final <- reduce(list_df, full_join, by = c("country","variable"))
+   
+  #df_merge_final <- merge_all(list_df, by=c("country","variable"))
   colnames(df_merge_final)[ncol(df_merge_final)] <- "target"
   return(df_merge_final)
 }

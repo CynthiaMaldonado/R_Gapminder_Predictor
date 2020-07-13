@@ -19,17 +19,20 @@ prediction <- function(df_merge_final, config){
   country_user <- config$data$country
   year_user <- config$data$year
   
-  target_value <- with(df_merge_final, target[country==country_user,
-                                              year==year_user])
+  #target_value <- with(df_merge_final, target[country==country_user, year==year_user])
   
   pred_file <- (df_merge_final$country %in% country_user) & 
-              (df_merge_final$year %in% year_user)
+              (df_merge_final$variable %in% year_user)
+  
+  target_value <- with(df_merge_final, target[pred_file])
+  
   
   check_nan <- df_merge_final[pred_file, 3:(ncol(df_merge_final)-1)]
   
   if(is.na(target_value) == FALSE){
     
     return(target_value)
+    
     }
   
   else{
@@ -41,8 +44,7 @@ prediction <- function(df_merge_final, config){
     
     else{
       
-      output_impossible <- print('Sorry, we have not enough information to 
-                                 make a prediction.')
+      return('Sorry, we have not enough information to make a prediction.')
       }
     }
 }

@@ -1,4 +1,4 @@
-#' @title callconfig
+#' @title callConfig
 #' @description xml config to R_list
 #'
 #' @param path, string 
@@ -22,7 +22,7 @@ callConfig <- function(path){
     
   }, error = function(e){
     
-    logerror("Config not found. Check if the filname in configpath is config.xml",
+    logerror("Config not found. Check if the filename in configpath is config.xml",
              logger = 'log')
     stop()
   })
@@ -33,11 +33,11 @@ callConfig <- function(path){
   
   config$data$predictors <- trimws(strsplit(config$data$predictors, ",")[[1]])
   
-  sep <- config$data$sep %in% c(",", ";")
+  sep <- config$data$sep %in% c(",")
   
-  if(sep){
+  if(!sep){
     
-    logerror("Sep solo puede valer ',' o ';' ", logger = 'log')
+    logerror("Sep has to be ','", logger = 'log')
     stop()
     
   }
@@ -55,7 +55,7 @@ callConfig <- function(path){
 validateConfigNodes <- function(config){
   
   principalNode <- identical(names(config), c("data", "model"))
-  dataNode <- identical(names(config$data), c("predictors", "target", "country", "year"))
+  dataNode <- identical(names(config$data), c("predictors", "sep", "target", "country", "year"))
   modelNode <- identical(names(config$model), c("trainRate"))
   
   nodes <- c("principalNode" = principalNode, "dataNode" = dataNode, 

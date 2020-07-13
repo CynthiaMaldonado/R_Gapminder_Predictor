@@ -18,16 +18,16 @@ GapminderApp <- function(path){
     loginfo("Starting the app...", logger = "log")
     
     loginfo("Reading Config...", logger = "log")
-    config <- callconfig(path)
+    config <- callConfig(path)
     loginfo("Config read.", logger = "log")
     
-    browser()
     loginfo("Reading data...", logger = "log")
-    data <- importdata(path, config)
+    df_merge_final <- importdata(path, config)
     loginfo("Data read.", logger = "log")
     
+    browser()
     loginfo("Looking for answer", logger = "log")
-    searching <- prediction(df_merge_final, config)
+    output <- prediction(df_merge_final, config)
     loginfo("Answer found.", logger = "log")
     
     
