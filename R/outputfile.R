@@ -12,13 +12,11 @@ generarOutput <- function(output, config, path){
 
 marktmp <- Sys.time()
 # this will give us information to check the efficiency of our app
-namefile <- paste0(path, "dataweuse")
+namefile <- paste0(path, "data/")
 
 tryCatch(expr = {
   
-  write.csv(output$prediction, file = namefile, sep = config$input$sep,
-            row.names = FALSE)
-  #I don't know if our output's colname will be prediction, but...
+  write.csv(output, file = namefile, sep = config$input$sep)
   
 }, error = function(e){
   
@@ -27,7 +25,7 @@ tryCatch(expr = {
 })
 
 
-namefile <- paste0(path, "modelweuse")
+namefile <- paste0(path, "output/model.R")
 
 tryCatch(expr = {
   
