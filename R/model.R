@@ -17,7 +17,8 @@ regression_model <- function(df_merge_final, config){
   
   #Drop rows with NAs
   
-  clean_df <- na.omit(df_merge_final)
+  #clean_df <- na.omit(df_merge_final)
+  #clean_df <- df_merge_final[complete.cases(df_merge_final), ]
   
   # Extract country and year to train the model
   

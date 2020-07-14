@@ -21,13 +21,13 @@ prediction <- function(df_merge_final, config){
   
   #target_value <- with(df_merge_final, target[country==country_user, year==year_user])
   
-  pred_file <- (df_merge_final$country %in% country_user) & 
+  pred_row <- (df_merge_final$country %in% country_user) & 
               (df_merge_final$variable %in% year_user)
   
-  target_value <- with(df_merge_final, target[pred_file])
+  target_value <- with(df_merge_final, target[pred_row])
   
   
-  check_nan <- df_merge_final[pred_file, 3:(ncol(df_merge_final)-1)]
+  check_nan <- df_merge_final[pred_row, 3:(ncol(df_merge_final)-1)]
   
   if(is.na(target_value) == FALSE){
     
@@ -37,7 +37,7 @@ prediction <- function(df_merge_final, config){
   
   else{
     
-    if(is.na(check_nan) == FALSE){
+    if(any(is.na(check_nan)) == FALSE){
       
       output_pred <- regression_model(df_merge_final, config)
       }

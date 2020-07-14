@@ -3,10 +3,10 @@
   <data>
     <predictors>military_expenditure_percent_of_gdp.csv,natural_gas_proven_reserves_per_person.csv</predictors>
     <sep>,</sep>
-    <target>income_per_person_gdppercapita_ppp_inflation_adjusted.csv</target>
+    <target>target_prueba_modelo.csv</target>
     
-    <country>Costa Rica</country>
-    <year>1961</year>
+    <country>Argentina</country>
+    <year>1985</year>
   </data>
   
   <model>

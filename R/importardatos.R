@@ -22,11 +22,11 @@
   # creating an empty list and a list with all csv,s located in config
   preds <- config$data$predictors
   list_df <- list()
-  filenames <- as.list(c(preds, config$data$target))
+  filenames <- c(preds, config$data$target)
   
   # loop to open csv and append to list
   for (i in 1:length(filenames)){
-    #url <- paste0(dataPath, filenames[i])
+
     df <- data.table::fread(paste0(dataPath, filenames[i]), sep = ',', encoding = 'UTF-8', 
                             data.table = FALSE, header = TRUE)
    
