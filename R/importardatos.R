@@ -4,7 +4,6 @@
 #' @param path 
 #' @param config 
 #' 
-#' @export
 #' @import reshape2
 #' @import data.table
 #' @import tidyverse

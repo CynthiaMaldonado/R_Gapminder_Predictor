@@ -5,7 +5,6 @@
 #' @param config 
 #' @param path 
 #'
-#' @export
 #' @import logging
 #' 
 #' @return
@@ -19,7 +18,7 @@ marktmp <- Sys.time()
 pathOutput <- paste0(path, "output/output.txt")
 
 tryCatch(expr = {
-  write.table(output, file = pathOutput, row.names = F, col.names = F)
+  write.table(output, file = pathOutput, row.names = FALSE, col.names = FALSE)
   
 }, error = function(e){
   

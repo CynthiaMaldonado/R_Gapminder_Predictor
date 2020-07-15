@@ -3,7 +3,6 @@
 #'
 #' @param path
 #' 
-#' @export 
 #' @import XML
 #' 
 #' @return config

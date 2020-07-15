@@ -5,7 +5,6 @@
 #' @param df_merge_final
 #' @param config
 #' 
-#' @export 
 #' @import MLmetrics
 #' 
 #' @return final_prediction
