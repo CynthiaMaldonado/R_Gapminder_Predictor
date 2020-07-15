@@ -1,14 +1,10 @@
 #' @title prediction
-#'
 #' @description search for the required output
 #'
-#' @param df_merge_final, dataframe
+#' @param df_merge_final
 #' @param config
 #'
-#' @export
-#' @import
-#'
-#' @return output_value
+#' @return output
 #' @author Fran&Cyn
 #' 
 
@@ -39,7 +35,7 @@ prediction <- function(df_merge_final, config){
     
     if(any(is.na(check_nan)) == FALSE){
       
-      output_pred <- regression_model(df_merge_final, config)
+      return(regression_model(df_merge_final, config))
       }
     
     else{

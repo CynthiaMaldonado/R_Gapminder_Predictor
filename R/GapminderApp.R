@@ -1,11 +1,12 @@
-
 #' @title loginfo
 #' @description inform the user about the processing status
 #' 
-#' @param path, string 
+#' @param path
 #' 
-#' @export
+#' @export 
 #' @import logging
+#' 
+#' @return
 #'
 #' @author MigBor
 
@@ -25,7 +26,6 @@ GapminderApp <- function(path){
     df_merge_final <- importdata(path, config)
     loginfo("Data read.", logger = "log")
     
-    browser()
     loginfo("Looking for answer", logger = "log")
     output <- prediction(df_merge_final, config)
     loginfo("Answer found.", logger = "log")

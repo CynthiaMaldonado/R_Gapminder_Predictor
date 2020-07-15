@@ -1,15 +1,16 @@
-
-
-
 #' @Title importdata
+#' @description import and merge data from config
 #'
 #' @param path 
 #' @param config 
-#'
-#' @return df_merge_final
+#' 
 #' @export
-
 #' @import reshape2
+#' @import data.table
+#' @import tidyverse
+#' 
+#' @return df_merge_final
+#' 
 #' @author gonzalo
 
 
@@ -42,6 +43,7 @@
   
   # merging df
    
+   library(tidyverse)
    df_merge_final <- reduce(list_df, full_join, by = c("country","variable"))
    
   #df_merge_final <- merge_all(list_df, by=c("country","variable"))

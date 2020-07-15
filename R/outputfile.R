@@ -1,39 +1,29 @@
-#' Title Generating Output
+#' @title Generating Output
+#' @description generate output file with the user's request
 #'
 #' @param output 
 #' @param config 
 #' @param path 
 #'
+#' @export
 #' @import logging
+#' 
 #' @return
+#' 
 #' @author MigBor
 
 generarOutput <- function(output, config, path){
 
 marktmp <- Sys.time()
 # this will give us information to check the efficiency of our app
-namefile <- paste0(path, "data/")
+pathOutput <- paste0(path, "output/output.txt")
 
 tryCatch(expr = {
-  
-  write.csv(output, file = namefile, sep = config$input$sep)
+  write.table(output, file = pathOutput, row.names = F, col.names = F)
   
 }, error = function(e){
   
   logerror("Something went wrong saving!", logger = 'log')
-  stop()
-})
-
-
-namefile <- paste0(path, "output/model.R")
-
-tryCatch(expr = {
-  
-  saveRDS(output$model, file = namefile)
-  
-}, error = function(e){
-  
-  logerror("The model is not saved!", logger = 'log')
   stop()
 })
 }

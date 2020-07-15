@@ -1,12 +1,12 @@
 #' @title callConfig
 #' @description xml config to R_list
 #'
-#' @param path, string 
-#'
-#' @return list(config.xml)
+#' @param path
 #' 
 #' @export 
 #' @import XML
+#' 
+#' @return config
 #'
 #' @author Cyn
 
