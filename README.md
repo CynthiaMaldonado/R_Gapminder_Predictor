@@ -1,5 +1,5 @@
 
-# R end to end project
+# R end to end project: GapminderApp
   
 Given at least 3 csvs from Gapminders' website, our app
 predicts values of empty cells in one of them based on the information 
