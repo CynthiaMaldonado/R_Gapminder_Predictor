@@ -1,0 +1,16 @@
+<config>
+ 
+  <data>
+    <predictors>life_expectancy_years.csv,sugar_per_person_g_per_day.csv</predictors>
+    <sep>,</sep>
+    <target>newly_hiv_infected_percent_age_15_49.csv</target>
+    
+    <country>Australia</country>
+    <year>1990</year>
+  </data>
+  
+  <model>
+    <trainRate>0.8</trainRate>
+  </model>
+
+</config>

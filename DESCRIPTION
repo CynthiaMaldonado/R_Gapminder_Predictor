@@ -1,0 +1,26 @@
+Package: GapminderApp
+Title: Predicts values for missing data using a trained model
+Version: 0.1
+Authors@R: c(
+  person("Cynthia", "Maldonado", email = "cynthiamrdz@gmail.com",
+         role = c("aut", "cre")
+         ),
+  person("Fran", "Coronas", email = "fran2667@gmail.com",
+         role = "aut"
+         ),
+  person("Gonzalo", "Fuste", email = "gonzalofuste@gmail.com",
+         role = "aut"
+         ),
+  person("Miguel", "Borrero", email = "mborreroperez@gmail.com",
+         role = "aut"
+         ))
+Description: Given at least 3 csvs from Gapminders' website, our app
+  predicts values of empty cells in one of them based on the information 
+  in the others. In order to do that, it trains a model with a linear regression to 
+  obtain the most accurate value according to the country and year on your 
+  request.
+Depends: R (>= 3.1.0)
+License: cc
+LazyData: true
+RoxygenNote: 7.1.1
+Encoding: UTF-8
